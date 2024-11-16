@@ -79,6 +79,8 @@ It suggests an appropriate saint based on your situation and generates a meaning
 for their intercession.
 """
 )
+st.sidebar.image("luce.png", caption="Image of Luce")
+
 
 # Footer
 st.markdown("---")
