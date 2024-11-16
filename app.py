@@ -1,12 +1,18 @@
+import os
 import streamlit as st
 from openai import OpenAI
 
 from dotenv import load_dotenv
 
 
-load_dotenv()
-client = OpenAI()
+# Check if running on Streamlit Cloud
+if "STREAMLIT_RUNTIME" in os.environ:
+    api_key = st.secrets["OPENAI_API_KEY"]
+else:
+    api_key = os.getenv("OPENAI_API_KEY")
 
+# Set the API key for OpenAI client
+client = OpenAI(api_key=api_key)
 
 # Load environment variables
 load_dotenv()
@@ -20,7 +26,7 @@ def generate_prayer(problem_description):
     Then compose a brief, heartfelt prayer asking for that saint's intercession. 
     The response should include:
     1. The chosen saint's name and why they are relevant
-    2. A 2-3 sentence prayer asking for their intercession, written in the first person (e.g. ""St. Anthony, please help me find my lost keys."")
+    2. A 3-4 sentence prayer asking for their intercession, written in the first person (e.g. ""St. Anthony, please help me find my lost keys."")
     Format the response with the saint explanation first, followed by the prayer in italics.
     3. End the prayer with a traditional Catholic closing statement followed by ""Amen."""
 
